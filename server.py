@@ -57,7 +57,7 @@ def get_task(task_id: int):
     return request.session.get(Tasks, task_id)
 
 class TasksView(MethodView):
-    '''Класс для обработки запросов по url /tasks'''
+    '''Класс для обработки http запросов по url /tasks'''
 
     def get(self):
         '''Функция предоставления http ответа на запрос всех записей из таблицы Task'''
@@ -71,7 +71,7 @@ class TasksView(MethodView):
         return jsonify({'id': task.id})
 
 class OneTaskView(MethodView):
-    '''Класс для обработки запросов по url /tasks/<int:task_id>'''
+    '''Класс для обработки http запросов по url /tasks/<int:task_id>'''
 
     def get(self, task_id):
         '''Функция предоставления http ответа на запрос записи из таблицы Task по id'''
@@ -99,7 +99,7 @@ class OneTaskView(MethodView):
 task_view = TasksView.as_view('task_view')
 task_one_view = OneTaskView.as_view('task_one_view')
 
-'''доступные url'''
+'''доступные url и методы'''
 app.add_url_rule('/tasks', view_func=task_view, methods=['GET','POST'])
 app.add_url_rule('/tasks/<int:task_id>', view_func=task_one_view, methods=['GET','PUT', 'DELETE'])
 
