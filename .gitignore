@@ -1,0 +1,11 @@
+./.venv/
+./.idea/
+./__pycache__
+./.env
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/test_task_7.iml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+__pycache__/models.cpython-312.pyc
