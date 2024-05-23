@@ -21,25 +21,25 @@ def validate(schema_class, json_data):
 
 @app.before_request
 def before_request():
-    '''Открытие сессии записи данных в БД'''
+    '''Автоматическое открытие сессии записи данных в БД при получении http запроса'''
     session = Session()
     request.session = session
 
 @app.after_request
 def after_request(response):
-    '''Закрытие сессии данных в БД после выполнения запроса'''
+    '''Автоматическое закрытие сессии данных в БД после выполнения запроса'''
     request.session.close()
     return response
 
 class HttpError(Exception):
-    '''Класс для вызова ошибок'''
+    '''Класс для вызова кодов ошибок'''
     def __init__(self, status_code: int, description: str):
         self.status_code = status_code
         self.description = description
 
     
 def add_task(task: Tasks):
-    '''Добавление записей в БД, в случае дублирования выдаёт стандартную ошибку'''
+    '''Добавление записей в БД, в случае дублирования выдаёт стандартную ошибку, используется в методах классов TasksView и OneTaskView'''
     try:
         request.session.add(task)
         request.session.commit()
@@ -48,12 +48,12 @@ def add_task(task: Tasks):
     return task
 
 def get_task_all():
-    '''Получение всех записей из БД'''
+    '''Получение всех записей из БД, используется в методах классов TasksView и OneTaskView'''
     all = request.session.query(Tasks).all()
     return [i.json for i in all]
 
 def get_task(task_id: int):
-    '''Получение одной записи из БД по id'''
+    '''Получение одной записи из БД по id, используется в методах классов TasksView и OneTaskView'''
     return request.session.get(Tasks, task_id)
 
 class TasksView(MethodView):
