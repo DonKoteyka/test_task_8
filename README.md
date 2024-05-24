@@ -16,6 +16,7 @@ git clone https://github.com/DonKoteyka/test_task_8.git
 docker-compose up --build -d 
 ``` 
 В случае использования ОС на базе Linux в начале команды следует добвать `sudo`.
+
 4. Произвести создание таблиц в БД:
 ```bash
 python models.py
