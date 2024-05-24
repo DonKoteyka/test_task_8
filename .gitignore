@@ -10,4 +10,7 @@
 .idea/inspectionProfiles/profiles_settings.xml
 __pycache__/models.cpython-312.pyc
 __pycache__/schema.cpython-312.pyc
-/temp.md
+__pycache__/conftest.cpython-312-pytest-8.2.1.pyc
+__pycache__/server.cpython-312.pyc
+__pycache__/test_app.cpython-312-pytest-8.2.1.pyc
+./.pytest_cache

@@ -1,0 +1,207 @@
+openapi: 3.0.0
+info:
+  title: RESTful API для управления списком задач 
+  description: Тестовое задание по созданию RESTful API для управления списком задач
+  version: 1.0.1
+servers:
+  - url: http://127.0.0.1:5000
+    description: Development server
+paths:
+  /tasks:
+    get:
+      summary: Метод получения всех задач
+      tags:
+        - tasks
+      responses:
+        '200':
+          description: Успешный ответ со списком всех задач
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/tasks"
+        'default':
+            description: Не стандартный ответ
+            content:
+              application/json: 
+                schema:
+                  $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод создания задач
+      tags:
+        - tasks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/task_create"
+      responses:
+        '200':
+          description: Успешный ответ с id задачи
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/task_id"
+                
+        'default':
+            description: Не стандартный ответ
+            content:
+              application/json: 
+                schema:
+                  $ref: "#/components/schemas/Error"
+          
+  /tasks/{id}:
+    get:
+      summary: Метод получения одной задачи
+      tags:
+        - tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id задачи
+          schema:
+            type: string
+          example: 1
+      responses:
+        '200':
+          description: Успешный ответ со списком всех задач
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/task"
+                
+        'default':
+            description: Не стандартный ответ
+            content:
+              application/json: 
+                schema:
+                  $ref: "#/components/schemas/Error"
+                  
+    put:
+      summary: Метод удаления одной задачи
+      tags:
+        - tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id задачи
+          schema:
+            type: string
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/task_create"
+          
+      responses:
+        '200':
+          description: Успешный ответ со списком всех задач
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/task"
+                
+        'default':
+            description: Не стандартный ответ
+            content:
+              application/json: 
+                schema:
+                  $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления одной задачи
+      tags:
+        - tasks
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: id задачи
+          schema:
+            type: string
+          example: 1
+      responses:
+        '200':
+          description: Успешное удаление
+          content:
+            application/json: 
+              schema:
+                $ref: "#/components/schemas/task_delete"
+        'default':
+            description: Не стандартный ответ
+            content:
+              application/json: 
+                schema:
+                  $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    task:
+      type: object
+      required: 
+        - title
+        - description
+      properties:
+        id:
+          type: string
+          example: 1
+        title:
+          type: string
+          example: Some example task's title 
+        description:
+          type: string
+          example: Some example task's description
+        created_at:
+          type: string
+          example: Fri, 24 May 2024 14:57:33 GMT
+        updated_at:
+          type: string
+          example: Fri, 24 May 2024 14:59:00 GMT
+    tasks:
+      type: array
+      items: 
+        $ref: "#/components/schemas/task"
+    Error:
+      type: object
+      required: 
+        - code
+        - name
+      properties:
+        code:
+          type: integer
+        message: 
+          type: string
+          
+    task_create:
+      type: object
+      required: 
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          example: Some example task's title 
+        description:
+          type: string
+          example: Some example task's description
+          
+    task_id:
+      type: object
+      required: 
+        - id
+      properties:
+        id:
+          type: string
+          example: 1
+          
+    task_delete:
+      type: object
+      required: 
+        - delete
+      properties:
+        delete:
+          type: string
+          example: {id: 4}
