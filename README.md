@@ -25,4 +25,5 @@ python models.py
 python server.py
 ```
 в резутьтате чего запустится локальный сервер по адресу `http://127.0.0.1:5000`
+
 6. Доступные роуты описаны в файле-настройках [openapi.yaml](openapi.yaml) и доступны через `swagger`, например через [https://editor.swagger.io/](https://editor.swagger.io/)
