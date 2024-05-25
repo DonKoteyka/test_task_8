@@ -10,7 +10,12 @@ ___
 ```bash 
 git clone https://github.com/DonKoteyka/test_task_8.git
 ```
-2. Для быстрого запуска в репозитории уже существует файл `.env`
+
+2. Для быстрого запуска в репозитории уже существует файл `.env`. А также необходимо установить библиотеки, предварительно создав вируальное окрудение:
+```bash 
+python -m venv venv & pip install -r requirements.txt
+```
+
 3. Для запуска БД, находясь в папке `test_task_8` выполнить следующие комманды:
 ```bash 
 docker-compose up --build -d 
@@ -21,6 +26,7 @@ docker-compose up --build -d
 ```bash
 python models.py
 ```
+
 5. Запустить сервер:
 ```bash
 python server.py
